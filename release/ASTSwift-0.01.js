@@ -502,7 +502,8 @@
               if (p.type == "Property" && p.key && p.value && p.value.raw) {
                 structDef.varDefs.push({
                   name: p.key.name,
-                  value: p.value.value
+                  value: p.value.value,
+                  raw: p.value.raw
                 });
                 _resStr += "var " + p.key.name + " = " + p.value.raw + "\n";
                 return;
@@ -528,7 +529,7 @@
             var cnt = 0;
             structDef.varDefs.forEach(function (v) {
               if (cnt++ > 0) me.out(",");
-              me.out(v.name + ":" + v.value);
+              me.out(v.name + ":" + v.raw);
             });
             me.out(")");
           }
