@@ -381,7 +381,7 @@
 
       if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty("__traitInit")) _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
       if (!_myTrait_.__traitInit) _myTrait_.__traitInit = [];
-      _myTrait_.__traitInit.push(function (codeStr, fnObj, structDefs) {
+      _myTrait_.__traitInit.push(function (codeStr, fnObj, structDefs, walkCallback) {
 
         var pw = AnalyzeFunc();
         var baseAST = esprima.parse(codeStr, {
@@ -399,6 +399,7 @@
         this._walkInfo = ctx;
         this._fnObj = fnObj;
         this._structDefs = structDefs;
+        this._wCb = walkCallback;
 
         // currently evaluated function
         ctx.currentFn = fnObj.get("name");
@@ -698,6 +699,8 @@
           });
         } else {
           if (node.type) {
+            if (this._wCb) this._wCb(node);
+
             if (this[node.type]) {
               this[node.type](node, ctx);
             } else {
