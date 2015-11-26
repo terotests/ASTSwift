@@ -600,7 +600,7 @@
        */
       _myTrait_.ReturnStatement = function (node, ctx) {
 
-        this.out(" return ");
+        this.out("return ");
         this.walk(node.argument, ctx);
       };
 
