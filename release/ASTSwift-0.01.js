@@ -402,7 +402,7 @@
         this._wCb = walkCallback;
 
         // currently evaluated function
-        ctx.currentFn = fnObj.get("name");
+        if (fnObj) ctx.currentFn = fnObj.get("name");
 
         this._structures = [];
 
@@ -411,7 +411,7 @@
         var contextObj = {};
 
         if (!contextObj.fnDecs) contextObj.fnDecs = {};
-        contextObj.fnDecs[fnObj.get("name")] = fnObj;
+        if (fnObj) contextObj.fnDecs[fnObj.get("name")] = fnObj;
 
         this._tabChar = "  ";
         this._codeStr = "";
